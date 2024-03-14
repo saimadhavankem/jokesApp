@@ -21,7 +21,13 @@
     #5ffbf1
   );
 }
-
+.heading {
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+  margin: 1px;
+}
 ul {
   background-color: #ffffff;
   width: 540px;

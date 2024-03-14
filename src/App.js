@@ -12,6 +12,7 @@ const App = () => {
   const [pword, setPword] = useState("");
   const [isLogin, setLogin] = useState(false);
   const [jokesList, setJokes] = useState([]);
+  const [valid, setValid] = useState(false);
 
   const onChangeUser = (event) => {
     setUser(event.target.value);
@@ -23,18 +24,25 @@ const App = () => {
 
   const onSubmitForm = async (event) => {
     event.preventDefault();
+    console.log(pword);
     if (name !== "" && pword !== "") {
       const correctUser = loginDetails.filter((each) => each.user === name);
-      if (correctUser[0].password === pword) {
+      console.log(correctUser);
+      if (correctUser.length !== 0 && correctUser[0].password === pword) {
         const url =
           "https://v2.jokeapi.dev/joke/any?format=json&blacklistFlags=nsfw,sexist&type=single&lang=EN&amount=10";
         const response = await fetch(url);
         const data = await response.json();
         setJokes(data.jokes);
         setLogin(true);
+        setValid(false);
       } else {
         setLogin(false);
+        setValid(true);
       }
+    } else {
+      setLogin(false);
+      setValid(true);
     }
   };
 
@@ -53,9 +61,20 @@ const App = () => {
           <form className="login-page" onSubmit={onSubmitForm}>
             <h1>Login</h1>
             <label htmlFor="username">Username</label>
-            <input id="username" type="text" onChange={onChangeUser} />
+            <input
+              placeholder="Ex:madhav"
+              id="username"
+              type="text"
+              onChange={onChangeUser}
+            />
             <label htmlFor="password">Password</label>
-            <input id="password" type="password" onChange={onChangePword} />
+            <input
+              placeholder="Ex:madhav@123"
+              id="password"
+              type="password"
+              onChange={onChangePword}
+            />
+            {valid && <p className="error">Invalid Credentials</p>}
             <button type="submit">Login</button>
           </form>
         </div>

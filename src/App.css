@@ -48,3 +48,8 @@ input {
   font-size: 15px;
   margin-bottom: 6px;
 }
+.error {
+  font-size: 14px;
+  color: red;
+  margin: 1px;
+}

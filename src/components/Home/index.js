@@ -9,6 +9,7 @@ const Home = (props) => {
   return (
     <div className="home-page">
       <ul>
+        <p className="heading">Jokes</p>
         {details.map((each) => (
           <li>{each.joke}</li>
         ))}
